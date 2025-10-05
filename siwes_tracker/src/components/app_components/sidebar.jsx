@@ -7,6 +7,8 @@ import {
   LogOut,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { auth } from "../../firebase/firebase";
+import { useNavigate } from "react-router-dom";
 function Sidebar() {
   const navigationItems = [
     { icon: <Home />, label: "Home" },
@@ -16,7 +18,12 @@ function Sidebar() {
     { icon: <Settings />, label: "Settings" },
   ];
 
-  
+  const navigate = useNavigate();
+
+  async function handleLogout(){
+    await auth.signOut();
+    navigate("/");
+  }
   return (
     <>
       <div className="w-64 h-screen bg-white flex flex-col p-4 shadow-lg">
@@ -50,7 +57,9 @@ function Sidebar() {
             );
           })}
         </div>
-        <div className="flex items-center gap-2 h-11 px-3 rounded-lg text-slate-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200 cursor-pointer">
+        <div className="flex items-center gap-2 h-11 px-3 rounded-lg text-slate-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200 cursor-pointer"
+        onClick={handleLogout}
+        >
           <LogOut /> Logout
         </div>
       </div>

@@ -15,7 +15,7 @@ function LandingPage() {
           <h1 className="text-6xl font-bold text-slate-900 max-w-xl mb-6 tracking-wide">Track Your SIWES Journey with <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">Confidence</span></h1>
           <p className="text-xl text-slate-600 max-w-2xl leading-relaxed">Streamline your Industrial Training experience with our intuitive daily log tracker. Stay organized, meet deadlines, and showcase your progress effortlessly.</p>
           <div className=' flex gap-4 mt-6'>
-            <Link to='/user'>
+            <Link to='/login'>
               <button 
               className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-lg  h-auto p-4 rounded-2xl text-white font-semibold">
               Get Started</button>

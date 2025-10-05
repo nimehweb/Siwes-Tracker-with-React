@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../firebase/firebase"
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function SignIn () {
       const [loginData, setLoginData] = useState({
@@ -33,6 +34,7 @@ function validateForm(values) {
     }
     return errors;
   }
+const navigate = useNavigate();
 
   async function handleSubmit(e){
     e.preventDefault();
@@ -44,6 +46,7 @@ function validateForm(values) {
       try {
         await signInWithEmailAndPassword(auth, loginData.email, loginData.password);
         toast.success("Login successful!", { position: "top-center" });
+        navigate("/user");
       } catch (error) {
         toast.error(`Error: ${error.message}`, { position: "top-center" });
       }

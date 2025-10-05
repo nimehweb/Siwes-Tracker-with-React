@@ -4,17 +4,37 @@ import TodoList from "./Dashboard_components/TodoList";
 import { Link } from "react-router-dom";
 import CustomCalendar from "../ui/customCalender";
 import useAttendanceStore from "../../stores/attendanceStore";
+import { auth,db } from "../../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 export default function Home(){
    const { entries } = useLogbookStore();
    const { attendanceData } = useAttendanceStore();
-   return(
+
+   const [user, setUser] = useState(null);
+   const fetchUserData = async () => {
+    auth.onAuthStateChanged(async (currentUser) => {
+      if (currentUser) {
+        const userDoc = doc(db, "users", currentUser.uid);
+        const userSnapshot = await getDoc(userDoc);
+        if (userSnapshot.exists()) {
+          setUser(userSnapshot.data());
+        }
+      }
+    });
+  };
+
+  useEffect(()=>{
+    fetchUserData()
+  },[])
+  return(
     <>
     <div className="p-10 h-screen overflow-y-auto">
       <div className="flex justify-between items-center mb-6">
         <div className="">
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-gray-600">Welcome back to your training overview</p>
+          <h1 className="text-3xl font-bold">{`Welcome back ${user ? user.fullName : ""}`}</h1>
+          <p className="text-gray-600">Here is your training overview</p>
         </div>
         <button className="bg-gradient-to-br from-blue-600 to-teal-600 text-white rounded-lg px-4 py-2 hover:from-blue-700 hover:to-teal-700 transition duration-300 ease-in-out">
           + Quick Add Entry
