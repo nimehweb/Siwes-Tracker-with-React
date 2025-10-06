@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileText, Download, Calendar, BarChart3, Filter, Eye } from "lucide-react";
+import { FileText, Download, Calendar, ChartBar as BarChart3, ListFilter as Filter, Eye } from "lucide-react";
 import useLogbookStore from "../../stores/logbookStore";
 import useAttendanceStore from "../../stores/attendanceStore";
 
